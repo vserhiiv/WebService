@@ -12,12 +12,23 @@ public class PurchaseItemConfiguration : IEntityTypeConfiguration<PurchaseItemAg
 
         builder.HasKey(pi => pi.Id);
 
+        builder.Property(pi => pi.Id)
+            .HasColumnName("id");
+
         builder.Property(pi => pi.Quantity)
+            .HasColumnName("quantity")
             .IsRequired();
 
         builder.Property(pi => pi.UnitPrice)
+            .HasColumnName("unit_price")
             .IsRequired()
             .HasColumnType("decimal(18,2)");
+
+        builder.Property(pi => pi.ProductId)
+            .HasColumnName("product_id");
+
+        builder.Property(pi => pi.PurchaseId)
+            .HasColumnName("purchase_id");
 
         builder.HasOne(pi => pi.Purchase)
             .WithMany(p => p.Items)

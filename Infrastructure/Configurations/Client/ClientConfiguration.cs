@@ -31,10 +31,10 @@ public class ClientConfiguration : IEntityTypeConfiguration<ClientAggregate>
             .IsRequired()
             .HasMaxLength(100);
 
-        builder.Property(p => p.LastName)
+        builder.Property(p => p.BirthDate)
             .HasColumnName("birth_date");
 
-        builder.Property(p => p.LastName)
+        builder.Property(p => p.RegistrationDate)
             .HasColumnName("registration_date");
 
         builder.HasMany(c => c.Purchases)

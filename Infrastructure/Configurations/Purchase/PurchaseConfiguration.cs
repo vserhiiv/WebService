@@ -24,6 +24,9 @@ public class PurchaseConfiguration : IEntityTypeConfiguration<PurchaseAggregate>
             .HasColumnName("date")
             .IsRequired();
 
+        builder.Property(p => p.ClientId).
+            HasColumnName("client_id");
+
         builder.Property(p => p.TotalAmount)
             .HasColumnName("total_amount")
             .IsRequired()
