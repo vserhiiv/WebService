@@ -42,8 +42,8 @@ public class WebServiceDbContext : DbContext
         );
 
         modelBuilder.Entity<PurchaseAggregate>().HasData(
-            new PurchaseAggregate { Id = 1, Number = "0503002010", Date = new DateTime(2024, 3, 10).ToUniversalTime(), TotalAmount = 3500m, ClientId = 1 },
-            new PurchaseAggregate { Id = 2, Number = "0503002011", Date = new DateTime(2024, 4, 20).ToUniversalTime(), TotalAmount = 2000m, ClientId = 2 }
+            new PurchaseAggregate { Id = 1, Number = "0503002010", Date = new DateTime(2025, 6, 10).ToUniversalTime(), TotalAmount = 3500m, ClientId = 1 },
+            new PurchaseAggregate { Id = 2, Number = "0503002011", Date = new DateTime(2025, 6, 20).ToUniversalTime(), TotalAmount = 2000m, ClientId = 2 }
         );
 
         modelBuilder.Entity<PurchaseItemAggregate>().HasData(
