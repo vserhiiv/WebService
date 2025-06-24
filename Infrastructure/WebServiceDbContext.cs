@@ -14,7 +14,6 @@ public class WebServiceDbContext : DbContext
         DbContextOptions<WebServiceDbContext> options
         ) : base(options)
     {
-        Database.Migrate();
     }
 
     public DbSet<ClientAggregate> Clients { get; set; } = null!;
