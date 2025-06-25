@@ -2,5 +2,5 @@
 
 namespace Contracts.Client.Categories;
 
-public class CategoriesRequest : ListRequest
+public class ClientCategoriesRequest : ListRequest
 {}

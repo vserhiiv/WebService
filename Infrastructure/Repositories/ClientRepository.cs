@@ -22,7 +22,13 @@ public class ClientRepository : IClientRepository
         var clients = await _context.Clients
             .AsNoTracking()
             .Where(c => c.BirthDate.Day == date.Day && c.BirthDate.Month == date.Month)
-            .Select(c => new ClientBithdayModel { Id = c.Id, FullName = c.FirstName + " " + c.SecondName + " " + c.LastName })
+            .Select(c => new ClientBithdayModel
+            { 
+                Id = c.Id,
+                FirstName = c.FirstName,
+                SecondName = c.SecondName,
+                LastName = c.LastName
+            })
             .Skip((PageNumber == 0 ? 1 : PageNumber - 1) * PageSize)
             .Take(PageSize)
             .ToListAsync();
@@ -51,7 +57,9 @@ public class ClientRepository : IClientRepository
             .Select(g => new RecentPurchaseModel
             {
                 Id = g.Key.Id,
-                FullName = g.Key.FirstName + " " + g.Key.SecondName + " " + g.Key.LastName,
+                FirstName = g.Key.FirstName,
+                SecondName = g.Key.SecondName,
+                LastName = g.Key.LastName,
                 LastPurchaseDate = g.Max(p => p.Date)
             })
             .Skip((PageNumber == 0 ? 1 : PageNumber - 1) * PageSize)

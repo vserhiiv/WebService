@@ -4,6 +4,7 @@ using Application.Queries.Client.RecentPurchases;
 using Contracts.Client.BirthdayClients;
 using Contracts.Client.Categories;
 using Contracts.Client.RecentPurchases;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,16 +15,16 @@ namespace WebService.Controllers
     public class ClientController : ControllerBase
     {
 
-        private readonly ILogger<ClientController> _logger;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
         public ClientController(
-            ILogger<ClientController> logger,
-            IMediator mediator
+            IMediator mediator,
+            IMapper mapper
             )
         {
-            _logger = logger;
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpGet("birthdays")]
@@ -31,21 +32,30 @@ namespace WebService.Controllers
         {
 
             var result = await _mediator.Send(new BirthdayClientsQuery(request.PageNumber, request.PageSize, request.Date));
-            return Ok(result);
+
+            var response = _mapper.Map<BirthdayClientsResponse>(result);
+
+            return Ok(response);
         }
 
         [HttpGet("recent-purchases")]
         public async Task<IActionResult> GetRecentPurchases([FromQuery] RecentPurchasesRequest request)
         {
             var result = await _mediator.Send(new RecentPurchasesQuery(request.PageNumber, request.PageSize, request.Days));
-            return Ok(result);
+
+            var response = _mapper.Map<RecentPurchasesResponse>(result);
+
+            return Ok(response);
         }
 
         [HttpGet("{clientId}/categories")]
-        public async Task<IActionResult> GetCategories([FromQuery] CategoriesRequest request, int clientId)
+        public async Task<IActionResult> GetCategories([FromQuery] ClientCategoriesRequest request, int clientId)
         {
             var result = await _mediator.Send(new ClientCategoriesQuery(request.PageNumber, request.PageSize, clientId));
-            return Ok(result);
+
+            var response = _mapper.Map<ClientCategoriesResponse>(result);
+
+            return Ok(response);
         }
     }
 }
