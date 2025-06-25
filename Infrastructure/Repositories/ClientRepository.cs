@@ -51,7 +51,7 @@ public class ClientRepository : IClientRepository
             .Select(g => new RecentPurchaseModel
             {
                 Id = g.Key.Id,
-                FullName = g.Key.FirstName,
+                FullName = g.Key.FirstName + " " + g.Key.SecondName + " " + g.Key.LastName,
                 LastPurchaseDate = g.Max(p => p.Date)
             })
             .Skip((PageNumber == 0 ? 1 : PageNumber - 1) * PageSize)
